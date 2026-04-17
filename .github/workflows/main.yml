@@ -1,0 +1,15 @@
+name: Compile ESPHome
+on: [workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: esphome/build-action@v2
+        with:
+          config_file: led-blink.yaml
+          version: latest
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-firmware
+          path: .esphome/build/led-blink/.pioenvs/led-blink/firmware.bin
